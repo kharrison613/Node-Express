@@ -15,8 +15,13 @@ module.exports = {
   delete: (id) => {
     const index = users.findIndex(user => user.id === id);
     if (index !== -1) {
-      return users.splice(index, 1)[0];
+      const deletedUser = users.splice(index, 1)[0];
+      if (deletedUser === null || deletedUser === undefined) {
+        console.error('User not found for deletion');
+      }
+      return deletedUser;
     }
+    console.error('No user found for deletion with id: ', id);
     return null;
   }
 };
